@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 
-const Formulario = () => {
+const Formulario = ({setSearch}) => {
 
     const [busqueda, setBusqueda] = useState({
         artista: '',
         cancion: ''
     });
 
-    const {artista, cancion} = busqueda;
-
     const [error, setError] = useState(false);
+
+    const { artista, cancion } = busqueda;
 
     const guardarBusqueda = e => {
         setBusqueda({
@@ -24,20 +24,20 @@ const Formulario = () => {
         // Validar
         if (artista.trim() === '' || cancion.trim() === '') {
             setError(true);
+            return;
         }
 
         setError(false);
+
+        // Pasar la busqueda al componente principal
+        setSearch(busqueda);
     }
 
     return (
         <div className="bg-info">
             <div className="container">
                 <div className="row">
-                    {
-                        error
-                        ? <p className="alert alert-danger text-white text-center p-2">Por favor rellena todos los campos</p>
-                        : null
-                    }
+
                     <form
                         onSubmit={handleSubmit}
                         className="col card text-white bg-transparent mb-5 pt-5 pb-2"
@@ -81,6 +81,11 @@ const Formulario = () => {
                             </div>
 
                         </fieldset>
+                        {
+                            error
+                                ? <p className="alert alert-danger text-white text-center mt-5">Por favor rellena todos los campos</p>
+                                : null
+                        }
                     </form>
                 </div>
             </div>

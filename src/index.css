@@ -76,3 +76,14 @@ h2 {
 .fa-lastfm {
   color: #d51007;
 }
+
+@media (max-width: 767px) {
+  legend::before {
+    width: calc(100% );
+    margin: 0 auto;
+  }
+
+  .titleletra {
+    margin-top: 3rem;
+  }
+}
